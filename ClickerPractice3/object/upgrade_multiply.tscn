@@ -1,0 +1,114 @@
+[gd_scene load_steps=6 format=1]
+
+[ext_resource path="res://object/upgrade_multiply.gd" type="Script" id=1]
+[ext_resource path="res://object/upgrade_unit.tscn" type="PackedScene" id=2]
+[ext_resource path="res://object/unit_mouse.png" type="Texture" id=3]
+[ext_resource path="res://resource/NanumBarunpenR.ttf" type="DynamicFontData" id=4]
+
+[sub_resource type="DynamicFont" id=1]
+
+font/size = 22
+font/use_mipmaps = true
+font/use_filter = true
+font/font = ExtResource( 4 )
+
+[node name="upgrade_multiply" type="Control"]
+
+anchor/right = 1
+anchor/bottom = 1
+rect/min_size = Vector2( 500, 100 )
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 0.0
+margin/top = 0.0
+margin/right = 524.0
+margin/bottom = 500.0
+script/script = ExtResource( 1 )
+power_formatter = "POW %d"
+
+[node name="bgpanel" type="Panel" parent="."]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 0.0
+margin/top = 0.0
+margin/right = 500.0
+margin/bottom = 100.0
+
+[node name="powers" type="Control" parent="."]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 0.0
+margin/top = 0.0
+margin/right = 400.0
+margin/bottom = 100.0
+
+[node name="count_up" parent="powers" instance=ExtResource( 2 )]
+
+anchor/right = 1
+anchor/bottom = 1
+margin/bottom = 0.0
+cost = 100.0
+power_formatter = "x %.2f"
+cost_multiply = 2.2
+
+[node name="upgrade_button" parent="powers/count_up"]
+
+text = "갯수 증가"
+
+[node name="power_up" parent="powers" instance=ExtResource( 2 )]
+
+anchor/right = 1
+anchor/bottom = 1
+margin/left = 200.0
+margin/right = 0.0
+margin/bottom = 0.0
+cost_multiply = 1.5
+power_add = 0.5
+
+[node name="upgrade_button" parent="powers/power_up"]
+
+text = "파워업"
+
+[node name="icon" type="TextureFrame" parent="."]
+
+anchor/right = 1
+anchor/bottom = 1
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 400.0
+margin/top = 0.0
+margin/right = 0.0
+margin/bottom = 0.0
+texture = ExtResource( 3 )
+stretch_mode = 0
+
+[node name="total_power" type="Label" parent="."]
+
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 0
+margin/left = 400.0
+margin/top = 1.0
+margin/right = 500.0
+margin/bottom = 101.0
+custom_fonts/font = SubResource( 1 )
+text = "123"
+align = 2
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+
+
+[editable path="powers/count_up"]
+[editable path="powers/power_up"]

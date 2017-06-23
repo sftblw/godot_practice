@@ -1,0 +1,109 @@
+[gd_scene load_steps=5 format=1]
+
+[ext_resource path="res://object/upgrade_unit.gd" type="Script" id=1]
+[ext_resource path="res://resource/button_font.tres" type="DynamicFont" id=2]
+[ext_resource path="res://resource/NanumBarunpenR.ttf" type="DynamicFontData" id=3]
+
+[sub_resource type="DynamicFont" id=1]
+
+font/size = 18
+font/use_mipmaps = true
+font/use_filter = true
+font/font = ExtResource( 3 )
+
+[node name="upgrade_unit" type="Control" groups=[
+"persistent",
+"money_listener",
+]]
+
+rect/min_size = Vector2( 200, 100 )
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 0.0
+margin/top = 0.0
+margin/right = 200.0
+margin/bottom = 100.0
+script/script = ExtResource( 1 )
+cost = 1.0
+level_formatter = "Lv. %d"
+cost_formatter = "$ %.2f"
+power_formatter = "+ %.2f"
+cost_multiply = 1.7
+power_add = 1
+
+[node name="upgrade_button" type="Button" parent="."]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 0.0
+margin/top = 0.0
+margin/right = 100.0
+margin/bottom = 50.0
+custom_fonts/font = ExtResource( 2 )
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+text = "업그레이드"
+flat = false
+
+[node name="cost_label" type="Label" parent="."]
+
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 0
+margin/left = 100.0
+margin/top = 0.0
+margin/right = 200.0
+margin/bottom = 50.0
+custom_fonts/font = SubResource( 1 )
+text = "비용"
+align = 1
+valign = 1
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+
+[node name="power_label" type="Label" parent="."]
+
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 0
+margin/left = 100.0
+margin/top = 50.0
+margin/right = 200.0
+margin/bottom = 100.0
+custom_fonts/font = SubResource( 1 )
+text = "힘"
+align = 1
+valign = 1
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+
+[node name="level_label" type="Label" parent="."]
+
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 0
+margin/left = 0.0
+margin/top = 50.0
+margin/right = 100.0
+margin/bottom = 100.0
+custom_fonts/font = SubResource( 1 )
+text = "레벨"
+align = 1
+valign = 1
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+
+[connection signal="pressed" from="upgrade_button" to="." method="_upgrade"]
+
+
