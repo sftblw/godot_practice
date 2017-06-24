@@ -1,8 +1,8 @@
 extends Control
 
-var level = 1 setget level_set; func level_set(val): level = val; _update_label()
+export(int)   var level = 1 setget level_set; func level_set(val): level = val; _update_label()
 export(float) var cost  = 1.0 setget cost_set;  func cost_set(val):  cost = val;  _update_label()
-var power = 1 setget power_set; func power_set(val): power = val; _update_label()
+export(float) var power = 1 setget power_set; func power_set(val): power = val; _update_label()
 export(String) var level_formatter = "Lv. %d"
 export(String) var cost_formatter  = "$ %.2f"
 export(String) var power_formatter = "+ %.2f"
@@ -10,6 +10,10 @@ export(float) var cost_multiply = 1.7
 export(float) var power_add     = 1
 
 signal label_updated
+
+onready var level_label = get_node("level_label")
+onready var cost_label = get_node("cost_label")
+onready var power_label = get_node("power_label")
 
 func _ready():
 	_update_label()
@@ -28,9 +32,9 @@ func _upgrade():
 	self.level += 1
 
 func _update_label():
-	if get_node("level_label") != null: get_node("level_label").set_text(level_formatter % level)
-	if get_node("cost_label")  != null: get_node("cost_label" ).set_text (cost_formatter  % cost)
-	if get_node("power_label") != null: get_node("power_label").set_text(power_formatter % power)
+	if level_label != null: level_label.set_text(level_formatter % level)
+	if cost_label  != null: cost_label.set_text (cost_formatter  % cost)
+	if power_label != null: power_label.set_text(power_formatter % power)
 	emit_signal("label_updated")
 	
 func _save_as_dic():

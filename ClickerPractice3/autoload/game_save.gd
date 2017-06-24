@@ -2,15 +2,19 @@ extends Node
 
 const SAVE_PATH = "user://game.save"
 
+func _is_game():
+	return get_tree().get_root().has_node("game")
+
 func _ready():
-	_load_game()
+	if _is_game():
+		_load_game()
 		
 func _notification(what):
 	if what == SceneTree.NOTIFICATION_WM_QUIT_REQUEST:
-		_save_game()
+		if _is_game():
+			_save_game()
 
 func _save_game():
-	print("save_game called")
 	# 파일 열기
 	var file = File.new()
 	file.open_encrypted_with_pass(SAVE_PATH, File.WRITE, "mypass" + OS.get_unique_ID())
@@ -40,7 +44,8 @@ func _load_game():
 	
 	# 로드
 	for path in dic:
-		get_node(path)._load_from_dic(dic[path])
+		if has_node(path):
+			get_node(path)._load_from_dic(dic[path])
 	
 	# 파일 닫기
 	file.close()
